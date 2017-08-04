@@ -56,19 +56,19 @@ let str_compileFd_html = pgp_gulpLib.fnStr_compileFd
                 "ary_regPatt" : 
                 [ 
                      
-                     "./home/*.combo.html" ,
-                     "./**/css/*.dev.less"   
+                     "./home/*.combo.html" 
+                    //  , "./**/css/*.dev.less"    
  
                 ]
             } ,
-            str_srcBaseUri : "http://sdaf:8080/abc/" ,
-            str_destBaseUri : "http://localhost:3000/public/" ,
+            str_srcBaseUri : "http://PH_host:8080/abc/" ,
+            str_destBaseUri : "http://localhost:3000/public/tMall_brow_l7_d01_codes_dev/" ,
             str_destVirPath : 2 ,
             /*"pgp_baseUri_ary" : 
             {
                 "^PH_baseUri%" : 
                 [
-                    "http://localhost-a:3000/1/" ,
+                    "http://PH_localhost-a:3000/1/" ,
                     "http://localhost:8080/public/tMall_brow_l7_d01_codes_dev/"
                 ] ,
                 "^PH_baseUri2%" : 
@@ -92,20 +92,33 @@ let str_compileFd_less = pgp_gulpLib.fnStr_compileFd
             pgp_globParams : 
             {
                 // "str_cwd" :  pgp_depeEnv.str_dir_append_mls ,
-                // "str_cwd" :   "./" ,
+                "str_cwd" :   "./" ,
                 "ary_regPatt" : 
                 [ 
                      
-                    "./append_mls/*.combo.html" ,
-                    // "./append_mls/css/*.dev.less"   
+                    //  "./home/*.combo.html" ,
+                     "./**/css/*.dev.less"   
  
                 ]
             } ,
-            str_srcBaseUri : "http://localhost:211" ,
-            str_destBaseUri : "http://sdaf:8080/abc/" ,
+            str_srcBaseUri : "http://PH_host:8080/abc/" ,
+            str_destBaseUri : "http://localhost:3000/public/tMall_brow_l7_d01_codes_dev/" ,
             str_destVirPath : 2 ,
+            /*"pgp_baseUri_ary" : 
+            {
+                "^PH_baseUri%" : 
+                [
+                    "http://PH_localhost-a:3000/1/" ,
+                    "http://localhost:8080/public/tMall_brow_l7_d01_codes_dev/"
+                ] ,
+                "^PH_baseUri2%" : 
+                [
+                    "http://127.0.0.1-b:8080/2/" ,
+                    "http://remote-b:2222/public/2/"
+                ] ,
+            } ,*/
             str_outputDir : null ,
-            str_injSrc : null 
+            str_injSrc : null
 
         }
     }
@@ -191,7 +204,8 @@ let str_less2Css = pgp_gulpLib.fnStr_cvt2Css
 ( 
     { 
         str_name : "fn_less" , 
-        ary_src : [ "./**/css/*.less" ] 
+        ary_src : [ "./**/css/*.res.less" ] ,
+        ary_depeFn : [ str_compileFd_less ]
     } 
 ) ;
 
@@ -221,11 +235,11 @@ let ary_defTask =
     
     
     
-    /*str_fileInclude
+    str_fileInclude
     ,
-    str_compileFd_html */
-    /*,
-    str_compileFd_less*/
+    str_compileFd_html 
+    ,
+    str_compileFd_less
     /*,
     str_rev_r*/
     /*,
@@ -240,13 +254,21 @@ pgp_gulp.task
     ary_defTask ,
     function ( )
     {
-        pgp_gulp.start 
-        ( 
-            [ 
-                str_less2Css
-                /*,
-                str_sass2Css */
-            ] 
+        setTimeout 
+        (
+            function ()
+            {
+                pgp_gulp.start 
+                ( 
+                    [ 
+                        str_less2Css
+                        /*,
+                        str_sass2Css */
+                    ] 
+                ) 
+
+            } ,
+            6000
         ) ;
         pgp_gulp.watch 
         ( 
