@@ -254,7 +254,7 @@ pgp_gulp.task
     ary_defTask ,
     function ( )
     {
-        setTimeout 
+        /*setTimeout 
         (
             function ()
             {
@@ -262,13 +262,28 @@ pgp_gulp.task
                 ( 
                     [ 
                         str_less2Css
-                        /*,
-                        str_sass2Css */
+                        // , str_sass2Css 
                     ] 
                 ) 
 
             } ,
             6000
+        ) ;*/
+        pgp_less2Css.pm_async.then
+        (
+            function ( resolved ) 
+            {
+                pgp_gulp.start 
+                ( 
+                    [ 
+                        resolved
+                        // , pgp_sass2Css 
+                    ] 
+                ) 
+
+            } ,
+            function ( rejected )
+            {}
         ) ;
         pgp_gulp.watch 
         ( 
