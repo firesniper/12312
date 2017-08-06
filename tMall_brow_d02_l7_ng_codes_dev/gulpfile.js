@@ -57,26 +57,26 @@ let str_compileFd_html = pgp_gulpLib.fnStr_compileFd
                 [ 
                      
                      "./home/*.combo.html" 
-                    //  , "./**/css/*.dev.less"    
+                     , "./*.combo.html"    
  
                 ]
             } ,
             str_srcBaseUri : "http://PH_host:8080/abc/" ,
             str_destBaseUri : "http://localhost:3000/public/tMall_brow_d02_l7_ng_codes_dev/" ,
             str_destVirPath : 2 ,
-            /*"pgp_baseUri_ary" : 
+            "pgp_baseUri_ary" : 
             {
-                "^PH_baseUri%" : 
+                "^PH_baseUri1%" : 
                 [
                     "http://PH_localhost-a:3000/1/" ,
-                    "http://localhost:8080/public/tMall_brow_d02_l7_ng_codes_dev/"
+                    "http://localhost:8080/mall_a01/"
                 ] ,
                 "^PH_baseUri2%" : 
                 [
                     "http://127.0.0.1-b:8080/2/" ,
                     "http://remote-b:2222/public/2/"
                 ] ,
-            } ,*/
+            } ,
             str_outputDir : null ,
             str_injSrc : null
 
@@ -139,7 +139,8 @@ let str_fileInclude = pgp_gulpLib.fnStr_fileInclude
         ary_src : 
         [
             //  pgp_depeEnv.str_dir_append_mls + 
-             "./home/*.dev.html"
+             "./home/*.dev.html" ,
+             "./*.dev.html"
         ] 
     } 
 ) ;
@@ -254,7 +255,7 @@ pgp_gulp.task
     ary_defTask ,
     function ( )
     {
-        setTimeout 
+        /*setTimeout 
         (
             function ()
             {
@@ -262,18 +263,33 @@ pgp_gulp.task
                 ( 
                     [ 
                         str_less2Css
-                        /*,
-                        str_sass2Css */
+                        // , str_sass2Css 
                     ] 
                 ) 
 
             } ,
             6000
+        ) ;*/
+        pgp_less2Css.pm_async.then
+        (
+            function ( resolved ) 
+            {
+                pgp_gulp.start 
+                ( 
+                    [ 
+                        resolved
+                        // , pgp_sass2Css 
+                    ] 
+                ) 
+
+            } ,
+            function ( rejected )
+            {}
         ) ;
         pgp_gulp.watch 
         ( 
             // pgp_libDepeEnv.str_laboRat + "/inputJs.dev.js" , 
-            "./**/*.html" ,
+            "./**/*.dev.html" ,
             [ str_fileInclude ] 
         ) ;
     }
